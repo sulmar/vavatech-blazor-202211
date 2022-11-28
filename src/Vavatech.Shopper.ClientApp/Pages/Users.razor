@@ -1,0 +1,46 @@
+﻿@page "/users"
+@using Shopper.Domain
+@*@inject HttpClient client*@
+
+<h3>Users</h3>
+
+<button @onclick="GetUsers">Get users</button>
+
+@if (users == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <ul>
+        @foreach(var user in users)
+        {
+            <li>@user.Name @user.UserName @user.Phone @user.Email</li>
+        }
+    </ul>
+}
+
+
+@code {
+    private IEnumerable<User> users;
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = await GetUsers();
+    }
+
+    private async Task<IEnumerable<User>> GetUsers()
+    {
+        HttpClient client = new HttpClient();
+        // GET https://jsonplaceholder.typicode.com/users/
+
+        //client.GetFromJsonAsync<IEnumerable<User>>("https://jsonplaceholder.typicode.com/users/")
+        //    .ContinueWith(task => users = task.Result);
+
+        var results = await client.GetFromJsonAsync<IEnumerable<User>>("https://jsonplaceholder.typicode.com/users/");
+
+        return results;
+        
+    }
+
+}

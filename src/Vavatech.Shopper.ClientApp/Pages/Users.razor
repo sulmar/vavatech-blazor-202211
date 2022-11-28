@@ -1,6 +1,6 @@
 ﻿@page "/users"
 @using Shopper.Domain
-@*@inject HttpClient client*@
+@inject HttpClient client
 
 <h3>Users</h3>
 
@@ -30,14 +30,8 @@ else
     }
 
     private async Task<IEnumerable<User>> GetUsers()
-    {
-        HttpClient client = new HttpClient();
-        // GET https://jsonplaceholder.typicode.com/users/
-
-        //client.GetFromJsonAsync<IEnumerable<User>>("https://jsonplaceholder.typicode.com/users/")
-        //    .ContinueWith(task => users = task.Result);
-
-        var results = await client.GetFromJsonAsync<IEnumerable<User>>("https://jsonplaceholder.typicode.com/users/");
+    {       
+        var results = await client.GetFromJsonAsync<IEnumerable<User>>("/users/");
 
         return results;
         

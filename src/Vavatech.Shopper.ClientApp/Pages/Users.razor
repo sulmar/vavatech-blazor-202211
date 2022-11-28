@@ -1,10 +1,11 @@
 ﻿@page "/users"
 @using Shopper.Domain
-@inject HttpClient client
+@using Shopper.ClientApp.Services
+
+@inject JsonPlaceholderService Api
 
 <h3>Users</h3>
 
-<button @onclick="GetUsers">Get users</button>
 
 @if (users == null)
 {
@@ -26,15 +27,9 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        users = await GetUsers();
+        users = await Api.GetUsers();
     }
 
-    private async Task<IEnumerable<User>> GetUsers()
-    {       
-        var results = await client.GetFromJsonAsync<IEnumerable<User>>("/users/");
-
-        return results;
-        
-    }
+   
 
 }

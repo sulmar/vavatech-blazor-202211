@@ -1,14 +1,15 @@
 ﻿@page "/counter"
+@inject IJSInProcessRuntime JS
 
 <PageTitle>Counter</PageTitle>
 
 <h1>Counter</h1>
 
-<p>Your count value is @currentCount</p>
+<p>Your count value is @CurrentCount</p>
 
 <div>
-    <button @onclick="()=>currentCount++">Increment</button>
-    <button @onclick="()=>currentCount--">Decrement</button>
+    <button @onclick="()=>CurrentCount++">Increment</button>
+    <button @onclick="()=>CurrentCount--">Decrement</button>
 
     <button @onclick="IncrementCount">Increment</button>
     <button @onclick="DecrementCount">Decrement</button>
@@ -17,13 +18,40 @@
 </div>
 
 @code {
-    private int currentCount = 10;
+    // back field
+    private int currentCount;
+
+    public int CurrentCount 
+    { 
+        get
+        {
+            string value = JS.Invoke<string>("localStorage.getItem", "currentCount");
+
+            if (!int.TryParse(value, out currentCount))
+            {
+                currentCount = default;
+            }
+
+            return currentCount;
+        }
+        set
+        {
+            currentCount = value;
+
+            JS.InvokeVoid("localStorage.setItem", "currentCount", currentCount);
+        }
+    }
 
     private void IncrementCount()
     {
-        currentCount++;
+        CurrentCount++;
     }
 
-    private void DecrementCount() => currentCount--;
+    private void DecrementCount() => CurrentCount--;
+
+    protected override void OnInitialized()
+    {
+        JS.InvokeVoid("console.log", "Hello World!");
+    }
 }
 

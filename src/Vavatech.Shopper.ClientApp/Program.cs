@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.JSInterop;
 using Vavatech.Shopper.ClientApp;
 using Vavatech.Shopper.ClientApp.Services;
 
@@ -23,5 +24,7 @@ builder.Services.AddHttpClient<ProductService>(sp =>
 {
     sp.BaseAddress = new Uri("https://localhost:7219");
 });
+
+builder.Services.AddSingleton<IJSInProcessRuntime>(sp => (IJSInProcessRuntime)sp.GetRequiredService<IJSRuntime>());
 
 await builder.Build().RunAsync();

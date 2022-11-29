@@ -1,0 +1,37 @@
+﻿@page "/products/{id:int}"
+@using Vavatech.Shopper.Domain;
+
+
+<h3>ProductDetail</h3>
+
+<div>
+    @if (product == null)
+    {
+        <p><em>Loading...</em></p>
+
+    }
+    else
+    {
+        <p>@product.Price</p>
+        <p>@product.Name</p>
+        <p>@product.Color</p>
+        <p>@product.Price</p>
+    }
+</div>
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+    private Product product;
+    [Inject]
+    public IJSInProcessRuntime JS { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        string json = await JS.InvokeAsync<string>("localStorage.getItem", $"selectedProduct-{Id}");
+        product = System.Text.Json.JsonSerializer.Deserialize<Product>(json);
+
+    }
+
+}

@@ -20,6 +20,7 @@ else
                 <th>Color</th>
                 <th>Price</th>
                 <th>Size</th>
+                <th>Edit</th>
             </tr>
         </thead>
 
@@ -32,6 +33,7 @@ else
                     <td>@product.Color</td>
                     <td>@product.Price</td>
                     <td>@product.Size</td>
+                    <td><button @onclick=@(() => NavigateToProduct(product.Id))><span class="oi oi-box"/></button></td>
                 </tr>                
             }
         </tbody>
@@ -48,9 +50,22 @@ else
 @code {
     private IEnumerable<Product> products;
 
+    [Inject]
+    public IJSInProcessRuntime JS { get; set; }
+    [Inject]
+    public NavigationManager NavigationManager { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         products = await Api.GetProducts();
     }
 
+    private async Task NavigateToProduct(int id)
+    {        
+        var product = products.SingleOrDefault(p => p.Id == id);
+        var json = System.Text.Json.JsonSerializer.Serialize(product);
+        JS.InvokeVoid("localStorage.setItem", $"selectedProduct-{id}",json);
+
+        NavigationManager.NavigateTo($"/products/{id}");
+    }
 }

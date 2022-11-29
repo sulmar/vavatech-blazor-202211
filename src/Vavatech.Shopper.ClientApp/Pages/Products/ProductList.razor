@@ -61,7 +61,10 @@ else
     {        
         var product = products.SingleOrDefault(p => p.Id == id);
         var json = System.Text.Json.JsonSerializer.Serialize(product);
-        JS.InvokeVoid("localStorage.setItem", $"selectedProduct-{id}",json);
+
+        // TODO: budować klucz na podstawie routingu zamiast samodzielnie
+        var key = $"selectedProduct-{id}";
+        JS.InvokeVoid("localStorage.setItem", key, json);
 
         NavigationManager.NavigateTo($"/products/{id}");
     }

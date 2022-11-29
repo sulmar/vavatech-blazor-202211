@@ -1,5 +1,8 @@
 ﻿@page "/products"
 @using Domain
+@using Shopper.ClientApp.Services
+
+@inject ProductService Api
 
 
 <h3>ProductList</h3>
@@ -45,9 +48,9 @@ else
 @code {
     private IEnumerable<Product> products;
 
-    protected override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
-        return base.OnInitializedAsync();
+        products = await Api.GetProducts();
     }
 
 }

@@ -19,4 +19,9 @@ builder.Services.AddHttpClient<JsonPlaceholderService>(sp =>
     sp.BaseAddress = new Uri("https://jsonplaceholder.typicode.com");
 });
 
+builder.Services.AddHttpClient<ProductService>(sp =>
+{
+    sp.BaseAddress = new Uri("https://localhost:7219");
+});
+
 await builder.Build().RunAsync();

@@ -1,6 +1,4 @@
 ﻿@page "/users"
-@using Shopper.Domain
-@using Shopper.ClientApp.Services
 
 @inject JsonPlaceholderService Api
 
@@ -9,7 +7,7 @@
 
 @if (users == null)
 {
-    <p><em>Loading...</em></p>
+    <LoadingComponent />
 }
 else
 {

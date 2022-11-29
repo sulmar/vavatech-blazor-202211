@@ -1,7 +1,4 @@
 ﻿@page "/products"
-@using Domain
-@using Shopper.ClientApp.Services
-
 @inject ProductService Api
 
 
@@ -9,7 +6,7 @@
 
 @if (products == null)
 {
-    <p><em>Loading...</em></p>
+    <LoadingComponent />
 }
 else
 {

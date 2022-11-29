@@ -27,7 +27,7 @@ else
             @foreach (var user in users)
             {
                 <tr>
-                    <td>@user.Name</td>
+                    <td><NavLink target="_blank" href=@($"/users/{user.Id}")>@user.Name</NavLink> </td>
                     <td>@user.UserName</td>
                     <td>@user.Phone</td>
                     <td>@user.Email</td>
@@ -42,6 +42,8 @@ else
 
 
     </table>
+
+
 }
 
 

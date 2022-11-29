@@ -3,6 +3,7 @@
 @using Vavatech.Shopper.ClientApp.Services
 
 @inject JsonPlaceholderService Api
+@inject NavigationManager NavigationManager
 
 <PageTitle>User @user?.Name</PageTitle>
 
@@ -25,6 +26,13 @@ else
 }
 
 
+<div>
+    <NavLink href="users" class="btn btn-primary">Go to Users</NavLink>
+
+    <button class="btn btn-secondary" @onclick="NavigateToUsersAsync">Navigate to Users</button>
+</div>
+
+
 @code {
 
     [Parameter]
@@ -35,6 +43,15 @@ else
     protected override async Task OnParametersSetAsync()
     {
         user = await Api.GetUser(Id);
+    }
+
+    private async Task NavigateToUsersAsync()
+    {    
+        user.Name = user.Name.ToLower();
+
+        await Task.Delay(TimeSpan.FromSeconds(3));
+
+        NavigationManager.NavigateTo("users");
     }
 
 

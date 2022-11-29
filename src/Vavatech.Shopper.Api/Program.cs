@@ -8,7 +8,7 @@ builder.Services.AddSingleton<IProductRepository, InMemoryProductRepository>();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("ShopperPolicy", policy =>
+    options.AddDefaultPolicy(policy =>
     {
         policy.WithOrigins("https://localhost:7031");
         policy.WithMethods(new string[] { "GET" });
@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-app.UseCors("ShopperPolicy");
+app.UseCors();
 
 app.MapGet("/", () => "Hello World!");
 

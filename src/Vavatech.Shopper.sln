@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vavatech.Shopper.ServerApp"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vavatech.Shopper.Domain", "Vavatech.Shopper.Domain\Vavatech.Shopper.Domain.csproj", "{50D815C7-C48D-4C96-AF1F-7DA9365D364B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vavatech.Shopper.Infrastructure", "Vavatech.Shopper.Infrastructure\Vavatech.Shopper.Infrastructure.csproj", "{A123CFFF-3168-48DE-B0FD-BD9E2903287C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{50D815C7-C48D-4C96-AF1F-7DA9365D364B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50D815C7-C48D-4C96-AF1F-7DA9365D364B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50D815C7-C48D-4C96-AF1F-7DA9365D364B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A123CFFF-3168-48DE-B0FD-BD9E2903287C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A123CFFF-3168-48DE-B0FD-BD9E2903287C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A123CFFF-3168-48DE-B0FD-BD9E2903287C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A123CFFF-3168-48DE-B0FD-BD9E2903287C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

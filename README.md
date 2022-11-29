@@ -1,4 +1,4 @@
-# Blazoe 6
+# Blazor 6
 Przykłady ze szkolenia Blazor 6
 
 ## Podstawy

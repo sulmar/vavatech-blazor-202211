@@ -13,12 +13,35 @@
 }
 else
 {
-    <ul>
-        @foreach(var user in users)
-        {
-            <li>@user.Name @user.UserName @user.Phone @user.Email</li>
-        }
-    </ul>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>User name</th>
+                <th>Phone</th>
+                <th>Email</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var user in users)
+            {
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@user.UserName</td>
+                    <td>@user.Phone</td>
+                    <td>@user.Email</td>
+                </tr>                 
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Count: @users.Count()</td>
+            </tr>
+        </tfoot>
+
+
+    </table>
 }
 
 
@@ -30,6 +53,6 @@ else
         users = await Api.GetUsers();
     }
 
-   
+
 
 }

@@ -6,7 +6,19 @@ using Vavatech.Shopper.Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<IProductRepository, InMemoryProductRepository>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("ShopperPolicy", policy =>
+    {
+        policy.WithOrigins("https://localhost:7031");
+        policy.WithMethods(new string[] { "GET" });
+        policy.AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
+
+app.UseCors("ShopperPolicy");
 
 app.MapGet("/", () => "Hello World!");
 

@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Vavatech.Shopper.Domain\Vavatech.Shopper.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Products\" />
+  </ItemGroup>
+
 </Project>

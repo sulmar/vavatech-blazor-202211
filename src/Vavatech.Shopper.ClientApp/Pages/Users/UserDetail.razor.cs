@@ -3,9 +3,9 @@ using System;
 using Vavatech.Shopper.ClientApp.Services;
 using Vavatech.Shopper.Domain;
 
-namespace Vavatech.Shopper.ClientApp.Pages;
+namespace Vavatech.Shopper.ClientApp.Pages.Users;
 
-public partial class UserDetail 
+public partial class UserDetail
 {
     [Parameter]
     public int Id { get; set; }

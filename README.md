@@ -4,6 +4,8 @@ Przykłady ze szkolenia Blazor 6
 ## Podstawy
 
 ### Komendy CLI
+
+
 #### Środowisko
 - ``` dotnet --version ``` - wyświetlenie aktualnie używanej wersji SDK
 - ``` dotnet --list-sdks ``` - wyświetlenie listy zainstalowanych SDK
@@ -11,16 +13,12 @@ Przykłady ze szkolenia Blazor 6
 - ``` dotnet new globaljson --sdk-version {version} ``` - utworzenie pliku _global.json_ i ustawienie wersji SDK
 
 #### Projekt
-- ``` dotnet new --list ``` - wyświetlenie listy dostępnych szablonów
-- ``` dotnet new {template} ``` - utworzenie nowego projektu na podstawie wybranego szablonu, np. console, web
-- ``` dotnet new {template} -o {output} ``` - utworzenie nowego projektu w podanym katalogu
+- ``` dotnet new blazorserver ``` - utworzenie nowego projektu **Blazor Server**
+- ``` dotnet new blazorwasm ``` - utworzenie nowego projektu **Blazor Web Assembly**
 - ``` dotnet restore ``` - pobranie pakietów nuget powiązanych z projektem
 - ``` dotnet build ``` - kompilacja projektu
 - ``` dotnet run ``` - uruchomienie projektu
 - ``` dotnet watch run ``` - uruchomienie projektu w trybie śledzenia zmian
-- ``` dotnet run {app.dll}``` - uruchomienie aplikacji
-- ``` dotnet test ``` - uruchomienie testów jednostkowych
-- ``` dotnet watch test ``` - uruchomienie testów jednostkowych w trybie śledzenia zmian
 - ``` dotnet add {project.csproj} reference {library.csproj} ``` - dodanie odwołania do biblioteki
 - ``` dotnet remove {project.csproj} reference {library.csproj} ``` - usunięcie odwołania do biblioteki
 - ``` dotnet clean ``` - wyczyszczenie wyniku kompilacji, czyli zawartości folderu pośredniego _obj_ oraz folderu końcowego _bin_

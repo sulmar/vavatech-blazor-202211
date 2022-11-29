@@ -1,0 +1,42 @@
+﻿@page "/users/{id:int}"
+@using Vavatech.Shopper.Domain
+@using Vavatech.Shopper.ClientApp.Services
+
+@inject JsonPlaceholderService Api
+
+<PageTitle>User @user?.Name</PageTitle>
+
+<h3>User @Id</h3>
+
+
+@if (user == null)
+{
+    <p><em>Loading...</em></p>
+}
+
+else
+{
+    <div>
+        <p>@user.Name</p>
+        <p>@user.UserName</p>
+        <p>@user.Phone</p>
+        <p>@user.Website</p>
+    </div>
+}
+
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+
+    private User user;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        user = await Api.GetUser(Id);
+    }
+
+
+
+}

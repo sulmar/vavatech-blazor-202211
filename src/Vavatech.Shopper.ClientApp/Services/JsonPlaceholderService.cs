@@ -15,5 +15,10 @@ namespace Vavatech.Shopper.ClientApp.Services
         {
             return await client.GetFromJsonAsync<IEnumerable<User>>("/users");
         }
+
+        public async Task<User> GetUser(int id)
+        {
+            return await client.GetFromJsonAsync<User>($"/users/{id}");
+        }
     }
 }

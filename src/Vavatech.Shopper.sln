@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vavatech.Shopper.ClientApp"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vavatech.Shopper.ServerApp", "Vavatech.Shopper.ServerApp\Vavatech.Shopper.ServerApp.csproj", "{07F0F73A-EB4D-49D4-99A1-DA898913916C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vavatech.Shopper.Domain", "Vavatech.Shopper.Domain\Vavatech.Shopper.Domain.csproj", "{50D815C7-C48D-4C96-AF1F-7DA9365D364B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vavatech.Shopper.Domain", "Vavatech.Shopper.Domain\Vavatech.Shopper.Domain.csproj", "{50D815C7-C48D-4C96-AF1F-7DA9365D364B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

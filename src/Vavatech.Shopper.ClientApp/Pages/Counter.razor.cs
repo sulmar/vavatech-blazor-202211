@@ -2,7 +2,7 @@
 
 namespace Vavatech.Shopper.ClientApp.Pages;
 
-public partial class Counter : ComponentBase
+public partial class Counter 
 {
     private void ResetCount()
     {

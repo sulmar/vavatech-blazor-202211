@@ -11,36 +11,20 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
+       <TableTemplate Items="@users" TItem="User">
+            <HeaderTemplate>
                 <th>Name</th>
-                <th>User name</th>
-                <th>Phone</th>
+                <th>Username</th>
                 <th>Email</th>
-            </tr>
+                <th>Phone</th>
+                <th>Website</th>            
+            </HeaderTemplate>
 
-        </thead>
-        <tbody>
-            @foreach (var user in users)
-            {
-                <tr>
-                    <td><NavLink target="_blank" href=@($"/users/{user.Id}")>@user.Name</NavLink> </td>
-                    <td>@user.UserName</td>
-                    <td>@user.Phone</td>
-                    <td>@user.Email</td>
-                </tr>                 
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td>Count: @users.Count()</td>
-            </tr>
-        </tfoot>
+            <RowTemplate>
+                <UserComponent user="@context" />
 
-
-    </table>
-
+            </RowTemplate>
+        </TableTemplate>
 
 }
 

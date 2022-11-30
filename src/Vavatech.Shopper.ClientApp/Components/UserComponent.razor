@@ -1,0 +1,10 @@
+﻿<td> <NavLink href=@($"/users/{@User.Id}")> @User.Name</NavLink><td>
+<td>@User.UserName</td>
+<td>@User.Email</td>
+<td>@User.Phone</td>
+<td>@User.Website</td>
+
+@code {
+    [Parameter]
+    public User User { get; set; }
+}

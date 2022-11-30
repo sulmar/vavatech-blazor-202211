@@ -6,6 +6,12 @@ public class Product : BaseEntity
     public string Color { get; set; }
     public decimal Price { get; set; }
     public Size? Size { get; set; }
+    public IEnumerable<Tag> Tags { get; set; }
+}
+
+public class Tag : BaseEntity
+{
+    public string Title { get; set; }
 }
 
 public enum Size

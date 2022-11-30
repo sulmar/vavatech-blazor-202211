@@ -1,0 +1,12 @@
+﻿ul.horizontal {
+    list-style: none;
+    display: flex;
+}
+
+ul.horizontal li:not(:last-child):after {
+    content: ",";
+    margin-right: 0.1rem;
+
+}
+
+

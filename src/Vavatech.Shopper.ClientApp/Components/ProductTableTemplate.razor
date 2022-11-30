@@ -1,0 +1,58 @@
+﻿
+<table class="table table-hover">
+
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Color</th>
+            <th>Price</th>
+            <th>Size</th>
+            <th>Tags</th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var product in Products)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Color</td>
+                <td>@product.Price</td>
+                <td>@product.Size</td>
+                <td>
+                    <ul class="horizontal">
+                        @foreach (var tag in product.Tags)
+                        {
+                            <li>@tag.Title</li>
+                        }
+
+                        @*@string.Join(", ", @product.Tags.Select(t=>t.Title))*@
+                    </ul>
+                </td>
+                @* <td>
+            <button @onclick=@(() => NavigateToProduct(product.Id))><span class="oi oi-box"/></button>
+            </td>*@
+            </tr>
+        }
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td>Count: @Products.Count()</td>
+        </tr>
+    </tfoot>
+
+
+</table>
+
+@code {
+
+    [Parameter]
+    public IEnumerable<Product> Products { get; set; }
+
+
+
+
+}

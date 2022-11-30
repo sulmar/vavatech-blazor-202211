@@ -14,11 +14,23 @@
 }
 else
 {
-    <ProductTableTemplate Products="@products"/>
+    <TableTemplate Items="@products" TItem="Product" Context="product" Columns="@columns">
+        <RowTemplate>
+
+            <ProductComponent product="@product" />
+            
+            <td>
+                <button @onclick=@(() => NavigateToProduct(product.Id))><span class="oi oi-box" /></button>
+            </td>
+
+        </RowTemplate>
+    </TableTemplate>
 }
 
 @code {
     private IEnumerable<Product> products;
+
+    private IEnumerable<string> columns = new List<string> { "Name", "Color", "Price", "Size", "Tags" };
 
     [Inject]
     public IJSInProcessRuntime JS { get; set; }
@@ -33,7 +45,7 @@ else
     }
 
     private async Task NavigateToProduct(int id)
-    {        
+    {
         var product = products.SingleOrDefault(p => p.Id == id);
         var json = System.Text.Json.JsonSerializer.Serialize(product);
 

@@ -1,0 +1,19 @@
+﻿<td>@product.Name</td>
+<td>@product.Color</td>
+<td>@product.Price</td>
+<td>@product.Size</td>
+<td>
+    <ul class="horizontal">
+    @foreach (var tag in product.Tags)
+    {
+        <li>@tag.Title</li>
+    }
+    </ul>
+</td>
+
+@code {
+
+    [Parameter]
+    public Product product { get; set; }
+
+}

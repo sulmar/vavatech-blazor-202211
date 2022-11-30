@@ -1,13 +1,9 @@
 ﻿@typeparam TItem
 
 <table class="table table-hover">
-
     <thead>
         <tr>
-            @foreach (var column in Columns)
-            {
-                <th>@column</th>
-            }
+            @HeaderTemplate       
         </tr>
     </thead>
 
@@ -17,23 +13,19 @@
             <tr>
                 @RowTemplate(item)
             </tr>
-            
         }
-
     </tbody>
-
-
 </table>
 
 @code {
 
     [Parameter]
-    public IEnumerable<string> Columns { get; set; }
-
-    [Parameter]
-    public IEnumerable<TItem> Items { get; set; }
+    public RenderFragment HeaderTemplate { get; set; }
 
     [Parameter]
     public RenderFragment<TItem> RowTemplate { get; set; }
+
+    [Parameter]
+    public IEnumerable<TItem> Items { get; set; }
 
 }

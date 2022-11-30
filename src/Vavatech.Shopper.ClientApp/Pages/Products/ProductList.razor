@@ -14,9 +14,16 @@
 }
 else
 {
-    <TableTemplate Items="@products" TItem="Product" Context="product" Columns="@columns">
-        <RowTemplate>
+    <TableTemplate Items="@products" TItem="Product" Context="product">
+        <HeaderTemplate>
+            <th>Name</th>
+            <th>Color</th>
+            <th>Price</th>
+            <th>Size</th>
+            <th>Tags</th>            
+        </HeaderTemplate>
 
+        <RowTemplate>
             <ProductComponent product="@product" />
             
             <td>
@@ -28,9 +35,7 @@ else
 }
 
 @code {
-    private IEnumerable<Product> products;
-
-    private IEnumerable<string> columns = new List<string> { "Name", "Color", "Price", "Size", "Tags" };
+    private IEnumerable<Product> products;   
 
     [Inject]
     public IJSInProcessRuntime JS { get; set; }

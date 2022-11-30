@@ -3,7 +3,12 @@ using Vavatech.Shopper.Domain;
 
 namespace Vavatech.Shopper.ClientApp.Services
 {
-    public class ProductService : IProductRepository
+    public interface IProductService : IProductRepository
+    {
+        Task RecalcuateAllProductPriceAsync(decimal ratio);
+    }
+
+    public class ProductService : IProductService
     {
         private readonly HttpClient client;
 
@@ -38,6 +43,11 @@ namespace Vavatech.Shopper.ClientApp.Services
         }
 
         public Task<Product> GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task RecalcuateAllProductPriceAsync(decimal ratio)
         {
             throw new NotImplementedException();
         }

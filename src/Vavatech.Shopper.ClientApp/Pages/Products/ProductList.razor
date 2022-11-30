@@ -67,6 +67,8 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        await Task.Delay(TimeSpan.FromSeconds(5));
+
         products = await Api.GetProducts();
     }
 

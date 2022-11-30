@@ -28,8 +28,8 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        // TODO: budować klucz na podstawie routingu zamiast samodzielnie
-        var key = $"selectedProduct-{Id}";
+        var key = $"/products/{Id}";
+
         string json = await JS.InvokeAsync<string>("localStorage.getItem", key);
         product = System.Text.Json.JsonSerializer.Deserialize<Product>(json);
 

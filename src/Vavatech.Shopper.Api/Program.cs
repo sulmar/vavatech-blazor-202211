@@ -1,10 +1,17 @@
+using Bogus;
 using Vavatech.Shopper.Domain;
 using Vavatech.Shopper.Infrastructure;
+using Vavatech.Shopper.Infrastructure.Fakers;
 
 // var app = WebApplication.Create(args);
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<IProductRepository, InMemoryProductRepository>();
+builder.Services.AddSingleton<Faker<Product>, ProductFaker>();
+
+//builder.Services.AddSingleton<IProductRepository, InMemoryProductRepository>((sp) => new InMemoryProductRepository(
+//    new ProductFaker().Generate(100).ToDictionary(p => p.Id)
+//));
 
 builder.Services.AddCors(options =>
 {

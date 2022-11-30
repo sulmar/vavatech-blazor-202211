@@ -7,3 +7,9 @@
 Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
+
+@((MarkupString)myMarkup)
+
+@code{
+    string myMarkup = "<p class='markup'>This is a <em>markup string</em>.</p>    <button class='btn btn-primary'>Button</button>";
+}

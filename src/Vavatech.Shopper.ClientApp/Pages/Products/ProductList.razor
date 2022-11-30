@@ -6,7 +6,11 @@
 
 @if (products == null)
 {
-    <LoadingComponent />
+    <LoadingComponent>
+        <Content>
+            <img src="/icon-192.png" />
+        </Content>
+    </LoadingComponent>
 }
 else
 {

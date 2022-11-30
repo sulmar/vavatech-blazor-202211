@@ -2,12 +2,18 @@
 <div class="loader">
     <div class="spinner"></div>
     <p><em>@Message</em></p>
+    <div>
+        @Content
+    </div>    
 </div>
 
 @code {
 
     [Parameter]
     public string Message { get; set; } = "Loading...";
+
+    [Parameter]
+    public RenderFragment Content { get; set; }
 
 
 }

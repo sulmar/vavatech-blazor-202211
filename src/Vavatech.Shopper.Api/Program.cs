@@ -1,4 +1,6 @@
 using Bogus;
+using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using Vavatech.Shopper.Domain;
 using Vavatech.Shopper.Infrastructure;
 using Vavatech.Shopper.Infrastructure.Fakers;
@@ -35,10 +37,21 @@ app.UseCors();
 app.MapGet("/", () => "Hello World!");
 
 // GET api/products
-app.MapGet("api/products", async (IProductRepository repository) => await repository.GetAllAsync());
+//app.MapGet("api/products", async (IProductRepository repository) => await repository.GetAllAsync());
 
 // GET api/products/{id}
 app.MapGet("api/products/{id:int:min(1)}", async (int id, IProductRepository repository) => await repository.GetById(id));
+
+// Query String
+// GET api/products?filter={filter}
+app.MapGet("api/products", async ([FromQuery(Name ="filter")] string? filterValue, IProductRepository repository) =>
+{
+    if (filterValue == null)
+        return await repository.GetAllAsync();
+    else
+        return await repository.GetByContent(filterValue);
+});
+
 
 
 //app.MapGet("api/users", (HttpRequestMessage req, HttpResponseMessage res) 

@@ -10,5 +10,6 @@ namespace Vavatech.Shopper.Domain
     public interface IProductRepository : IEntityRepository<Product>
     {      
         Task<IEnumerable<Product>> GetByColor(string color);
+        Task<IEnumerable<Product>> GetByContent(string content);
     }
 }

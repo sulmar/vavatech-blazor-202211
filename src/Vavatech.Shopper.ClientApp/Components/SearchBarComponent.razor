@@ -1,0 +1,23 @@
+﻿<div>
+    <form>
+        <div>
+            <label for="filter">Search: </label>
+            <input type="text" id="filter" @bind-value="filter" />
+        </div>
+
+        <button type="button" @onclick="Search">Search</button>
+    </form>
+</div>
+
+@code {
+    private string filter;
+
+    [Parameter]
+    public EventCallback<string> OnSearch { get; set; }
+
+    private void Search()
+    {
+        OnSearch.InvokeAsync(filter);
+    }
+
+}

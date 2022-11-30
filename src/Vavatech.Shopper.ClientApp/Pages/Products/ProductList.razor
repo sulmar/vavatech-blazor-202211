@@ -14,6 +14,8 @@
 }
 else
 {
+    <SearchBarComponent OnSearch="HandleSearch" />
+
     <TableTemplate Items="@products" TItem="Product">
         <HeaderTemplate>
             <th>Name</th>
@@ -59,5 +61,12 @@ else
         JS.InvokeVoid("localStorage.setItem", key, json);
 
         NavigationManager.NavigateTo($"/products/{id}");
+    }
+
+    private async Task HandleSearch(string content)
+    {
+        await Task.Delay(TimeSpan.FromSeconds(2));
+
+        products = await Api.GetByContent(content);
     }
 }

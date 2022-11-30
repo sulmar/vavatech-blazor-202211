@@ -1,4 +1,7 @@
 ﻿@host = https://localhost:7219
 
+@filter = Fish
+
 GET {{host}}/api/products
 GET {{host}}/api/products/1
+GET {{host}}/api/products?filter={{filter}}

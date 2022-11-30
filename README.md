@@ -30,3 +30,21 @@ Przykłady ze szkolenia Blazor 6
 - ``` dotnet sln remove {folder}``` - usunięcie projektu z folderu z rozwiązania
 - ``` dotnet sln add {project.csproj}``` - dodanie projektu do rozwiązania
 - ``` dotnet sln remove {project.csproj}``` - usunięcie projektu z rozwiązania
+
+
+## NavigationManager
+
+NavigationManager.BaseUri
+```https://localhost:5001/```
+
+MyNavigationManager.ToAbsoluteUri("foo")
+```https://localhost:5001/foo```
+
+NavigationManager.Uri
+```https://localhost:5001/counter/3?q=red```
+
+NavigationManager.ToBaseRelativePath(NavigationManager.Uri)
+```counter/3?q=red```
+
+
+

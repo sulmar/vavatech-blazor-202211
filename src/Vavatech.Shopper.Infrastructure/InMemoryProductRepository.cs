@@ -1,21 +1,15 @@
-﻿using Bogus;
-using Vavatech.Shopper.Domain;
+﻿using Vavatech.Shopper.Domain;
 
 namespace Vavatech.Shopper.Infrastructure;
 public class InMemoryProductRepository : IProductRepository
 {
-    private readonly IDictionary<int, Product> _products;
+    private readonly IDictionary<int, Product> _products;   
 
-    public InMemoryProductRepository(Faker<Product> faker)
+    public InMemoryProductRepository(IDictionary<int, Product> products)
     {
-        _products = faker.Generate(100).ToDictionary(p => p.Id);
+        _products = products;
     }
 
-    //public InMemoryProductRepository(IDictionary<int, Product> products)
-    //{
-    //    _products = products;
-    //}
-    
     public Task<IEnumerable<Product>> GetAllAsync()
     {
         return Task.FromResult(_products.Values.AsEnumerable());

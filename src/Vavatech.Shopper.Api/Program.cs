@@ -9,9 +9,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<IProductRepository, InMemoryProductRepository>();
 builder.Services.AddSingleton<Faker<Product>, ProductFaker>();
 
-//builder.Services.AddSingleton<IProductRepository, InMemoryProductRepository>((sp) => new InMemoryProductRepository(
-//    new ProductFaker().Generate(100).ToDictionary(p => p.Id)
-//));
+builder.Services.AddSingleton<IDictionary<int, Product>>((sp) =>
+{
+    var faker = sp.GetRequiredService<Faker<Product>>();
+
+    var products = faker.Generate(100).ToDictionary(p => p.Id);
+
+    return products;
+});
 
 builder.Services.AddCors(options =>
 {

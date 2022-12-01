@@ -34,16 +34,16 @@ Przykłady ze szkolenia Blazor 6
 
 ## NavigationManager
 
-NavigationManager.BaseUri
+- _NavigationManager.BaseUri_
 ```https://localhost:5001/```
 
-MyNavigationManager.ToAbsoluteUri("foo")
+- _NavigationManager.ToAbsoluteUri("foo")_
 ```https://localhost:5001/foo```
 
-NavigationManager.Uri
+- _NavigationManager.Uri_
 ```https://localhost:5001/counter/3?q=red```
 
-NavigationManager.ToBaseRelativePath(NavigationManager.Uri)
+- _NavigationManager.ToBaseRelativePath(NavigationManager.Uri)_
 ```counter/3?q=red```
 
 

@@ -11,6 +11,10 @@ Content-Type: application/json
 {
 	"Id": 1,
 	"Name":"My",
+	"Barcode": "2566705335864",
 	"Description": "Lorem ipsum",
 	"Price": 0
 }
+
+###
+HEAD {{host}}/api/products/2566705335864

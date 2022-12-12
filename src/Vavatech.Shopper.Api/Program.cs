@@ -105,4 +105,15 @@ app.MapPut("api/products/{id}", async (
 //app.MapGet("api/users", (HttpRequestMessage req, HttpResponseMessage res) 
 //        => "Hello Users");
 
+// HEAD api/products/{barcode}
+
+app.MapMethods("api/products/{barcode}", new string[] { "HEAD" }, async (string barcode, IProductRepository repository) =>
+{
+    if (await repository.Exists(barcode))
+        return Results.Ok();
+    else
+        return Results.NotFound();
+
+});
+
 app.Run();

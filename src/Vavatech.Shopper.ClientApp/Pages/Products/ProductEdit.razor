@@ -32,6 +32,10 @@
             }
         </InputSelect>
 
+        <label for="barcode">Barcode</label>
+        <InputText id="barcode" @bind-Value="product.Barcode" class="form-control" />
+        <ValidationMessage For="@(()=>product.Barcode)" />
+
         <label for="size">Size</label>
         <InputSelect id="size" @bind-Value="product.Size" class="form-select">
             <option value="">Select size</option>

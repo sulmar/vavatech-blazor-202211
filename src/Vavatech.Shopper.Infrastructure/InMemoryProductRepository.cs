@@ -10,6 +10,13 @@ public class InMemoryProductRepository : IProductRepository
         _products = products;
     }
 
+    public Task<bool> Exists(string barcode)
+    {
+        var result = _products.Values.Any(p=>p.Barcode.Equals(barcode, StringComparison.OrdinalIgnoreCase));
+
+        return Task.FromResult(result);
+    }
+
     public Task<VirtualizeResponse<Product>> Get(PagingParameters parameters)
     {
         var totalSize = _products.Count;

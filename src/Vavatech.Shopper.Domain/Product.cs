@@ -7,6 +7,7 @@ public class Product : BaseEntity
   //  [Required, StringLength(50, MinimumLength = 3, ErrorMessage = "Długość nieprawidłowa")]
     public string Name { get; set; }
     public string Description { get; set; }
+    public string Barcode { get; set; }
     public string Color { get; set; }
  //   [Range(1, 1000)]
     public decimal Price { get; set; }

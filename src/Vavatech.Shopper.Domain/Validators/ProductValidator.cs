@@ -26,6 +26,9 @@ namespace Vavatech.Shopper.Domain.Validators
             RuleFor(p => p.Discount)
                 .InclusiveBetween(1, 500)
                 .When(p => p.HasDiscount);
+
+            //RuleFor(p => p.Barcode)
+            //    .MustAsync(async (barcode, token) => !await repository.Exists(barcode));
         }
     }
 }

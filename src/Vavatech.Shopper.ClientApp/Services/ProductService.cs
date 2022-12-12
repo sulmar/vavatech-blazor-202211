@@ -66,5 +66,16 @@ namespace Vavatech.Shopper.ClientApp.Services
         {
             await client.PutAsJsonAsync($"api/products/{entity.Id}", entity);
         }
+
+        public async Task<bool> Exists(string barcode)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Head, $"api/products/{barcode}");
+
+            var response = await client.SendAsync(request);
+
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
+
+
+        }
     }
 }

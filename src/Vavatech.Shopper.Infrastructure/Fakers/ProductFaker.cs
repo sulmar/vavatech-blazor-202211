@@ -20,6 +20,7 @@ public class ProductFaker : Faker<Product>
         RuleFor(p => p.Id, f => f.IndexFaker + 1);
 		RuleFor(p => p.Name, f => f.Commerce.ProductName());
         RuleFor(p => p.Description, f => f.Commerce.ProductDescription());
+        RuleFor(p => p.Barcode, f => f.Commerce.Ean13());
 		RuleFor(p => p.Color, f => f.Commerce.Color());
 		RuleFor(p => p.Price, f => decimal.Parse(f.Commerce.Price()));
 

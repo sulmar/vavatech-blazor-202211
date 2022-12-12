@@ -53,4 +53,11 @@ public class InMemoryProductRepository : IProductRepository
     {
         return Task.FromResult(_products[id]);
     }
+
+    public Task Update(Product entity)
+    {
+        _products[entity.Id] = entity;
+
+        return Task.CompletedTask;
+    }
 }

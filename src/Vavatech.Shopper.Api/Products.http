@@ -5,3 +5,12 @@
 GET {{host}}/api/products
 GET {{host}}/api/products/1
 GET {{host}}/api/products?filter={{filter}}
+PUT {{host}}/api/products/1
+Content-Type: application/json
+
+{
+	"Id": 1,
+	"Name":"My product",
+	"Description": "Lorem ipsum",
+	"Price": 100.99
+}

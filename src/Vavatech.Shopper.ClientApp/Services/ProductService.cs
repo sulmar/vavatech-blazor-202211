@@ -42,9 +42,9 @@ namespace Vavatech.Shopper.ClientApp.Services
             throw new NotImplementedException();
         }
 
-        public Task<Product> GetById(int id)
+        public async Task<Product> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await client.GetFromJsonAsync<Product>($"/api/products/{id}");
         }
 
         public Task RecalcuateAllProductPriceAsync(decimal ratio)
@@ -60,6 +60,11 @@ namespace Vavatech.Shopper.ClientApp.Services
 
             return response;
 
+        }
+
+        public async Task Update(Product entity)
+        {
+            await client.PutAsJsonAsync($"api/products/{entity.Id}", entity);
         }
     }
 }

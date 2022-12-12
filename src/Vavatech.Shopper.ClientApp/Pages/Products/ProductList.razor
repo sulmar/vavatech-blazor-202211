@@ -19,6 +19,7 @@ else
     <TableTemplate Items="@products" TItem="Product" OnScroll="GetProducts" TotalSize="TotalSize">
         <HeaderTemplate>
             <th>Name</th>
+            <th>Description</th>
             <th>Color</th>
             <th>Price</th>
             <th>Size</th>
@@ -29,7 +30,8 @@ else
             <ProductComponent product="@context" />
             
             <td>
-                <button @onclick=@(() => NavigateToProduct(context.Id))><span class="oi oi-box" /></button>
+                <button @onclick=@(() => NavigateToProduct(context.Id))><span class="oi oi-eye" /></button>
+                <button @onclick=@(()=> Edit(context.Id)) ><span class="oi oi-pencil" /></button>
             </td>
 
         </RowTemplate>
@@ -53,6 +55,12 @@ else
         var response = await Api.Get(new PagingParameters { PageSize = 20, StartIndex = 0 });
 
         products = response.Items;
+    }
+
+    private void Edit(int id)
+    {
+        NavigationManager.NavigateTo($"/products/Edit/{id}");
+
     }
 
     private async Task NavigateToProduct(int id)

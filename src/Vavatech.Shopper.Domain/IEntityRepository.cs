@@ -6,5 +6,6 @@
     {
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<TEntity> GetById(int id);
+        Task Update(TEntity entity);
     }
 }

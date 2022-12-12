@@ -11,5 +11,6 @@ namespace Vavatech.Shopper.Domain
     {      
         Task<IEnumerable<Product>> GetByColor(string color);
         Task<IEnumerable<Product>> GetByContent(string content);
+        Task<VirtualizeResponse<Product>> Get(PagingParameters parameters);
     }
 }

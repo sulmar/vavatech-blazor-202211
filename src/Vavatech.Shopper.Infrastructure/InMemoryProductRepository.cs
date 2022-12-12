@@ -10,6 +10,25 @@ public class InMemoryProductRepository : IProductRepository
         _products = products;
     }
 
+    public Task<VirtualizeResponse<Product>> Get(PagingParameters parameters)
+    {
+        var totalSize = _products.Count;
+
+        var items = _products.Values
+            .Skip(parameters.StartIndex)
+            .Take(parameters.PageSize)
+            .ToList();
+
+        var response = new VirtualizeResponse<Product>
+        {
+            Items = items,
+            TotalSize = totalSize
+        };
+
+        return Task.FromResult(response);
+        
+    }
+
     public Task<IEnumerable<Product>> GetAllAsync()
     {
         return Task.FromResult(_products.Values.AsEnumerable());

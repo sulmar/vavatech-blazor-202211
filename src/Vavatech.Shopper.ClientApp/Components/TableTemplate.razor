@@ -8,7 +8,7 @@
     </thead>
 
     <tbody>
-        <Virtualize Items="Items.ToList()" Context="item">
+        <Virtualize ItemsProvider="LoadItems" Context="item">
             <ItemContent>            
                 <tr>
                     @RowTemplate(item)
@@ -40,5 +40,26 @@
 
     [Parameter]
     public IEnumerable<TItem> Items { get; set; }
+
+    [Parameter]
+    public int TotalSize { get; set; }
+
+    [Parameter]
+    public EventCallback<PagingParameters> OnScroll { get; set; }
+
+    private async ValueTask<ItemsProviderResult<TItem>> LoadItems(ItemsProviderRequest request)
+    {
+        var count = Math.Min(request.Count, TotalSize - request.StartIndex);
+
+        var pagingParameters = new PagingParameters
+        {
+            StartIndex = request.StartIndex,
+                PageSize = count == 0 ? request.Count : count
+        };
+
+        await OnScroll.InvokeAsync(pagingParameters);
+
+        return new ItemsProviderResult<TItem>(Items, TotalSize);
+    }
 
 }

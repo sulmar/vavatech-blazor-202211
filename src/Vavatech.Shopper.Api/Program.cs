@@ -24,8 +24,10 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("https://localhost:7031");
-        policy.WithMethods(new string[] { "GET" });
+        policy.AllowAnyOrigin();
+        policy.AllowAnyMethod();
+        //policy.WithOrigins("https://localhost:7031");
+        //policy.WithMethods(new string[] { "GET" });
         policy.AllowAnyHeader();
     });
 });
@@ -44,12 +46,32 @@ app.MapGet("api/products/{id:int:min(1)}", async (int id, IProductRepository rep
 
 // Query String
 // GET api/products?filter={filter}
-app.MapGet("api/products", async ([FromQuery(Name ="filter")] string? filterValue, IProductRepository repository) =>
+app.MapGet("api/products/search", async ([FromQuery(Name ="filter")] string? filterValue, IProductRepository repository) =>
 {
     if (filterValue == null)
         return await repository.GetAllAsync();
     else
         return await repository.GetByContent(filterValue);
+});
+
+
+// GET api/products?startindex={startindex}&PageSize={PageSize}
+app.MapGet("/api/products", async (
+    [FromQuery] int startIndex, 
+    [FromQuery] int? pageSize,
+    IProductRepository repository
+    ) =>
+{
+    var productParameters = new PagingParameters
+    {
+        PageSize = pageSize.Value,
+        StartIndex = startIndex
+    };
+
+    var products = await repository.Get(productParameters);
+
+    return Results.Ok(products);
+
 });
 
 

@@ -16,7 +16,7 @@ else
 {
     <SearchBarComponent OnSearch="HandleSearch" />
 
-    <TableTemplate Items="@products" TItem="Product">
+    <TableTemplate Items="@products" TItem="Product" OnScroll="GetProducts" TotalSize="TotalSize">
         <HeaderTemplate>
             <th>Name</th>
             <th>Color</th>
@@ -39,6 +39,8 @@ else
 @code {
     private IEnumerable<Product> products;   
 
+    public int TotalSize { get; set; }
+
     [Inject]
     public IJSInProcessRuntime JS { get; set; }
     [Inject]
@@ -46,9 +48,11 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        await Task.Delay(TimeSpan.FromSeconds(2));
+        //await Task.Delay(TimeSpan.FromSeconds(2));
 
-        products = await Api.GetProducts();
+        var response = await Api.Get(new PagingParameters { PageSize = 20, StartIndex = 0 });
+
+        products = response.Items;
     }
 
     private async Task NavigateToProduct(int id)
@@ -68,5 +72,13 @@ else
         await Task.Delay(TimeSpan.FromSeconds(2));
 
         products = await Api.GetByContent(content);
+    }
+
+    private async Task GetProducts(PagingParameters pagingParameters)
+    {
+        var result = await Api.Get(pagingParameters);
+
+        products = result.Items;
+        TotalSize = result.TotalSize;
     }
 }

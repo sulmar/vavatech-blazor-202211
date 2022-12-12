@@ -34,7 +34,7 @@ namespace Vavatech.Shopper.ClientApp.Services
 
         public async Task<IEnumerable<Product>> GetByContent(string content)
         {
-            return await client.GetFromJsonAsync<IEnumerable<Product>>($"/api/products?filter={content}");
+            return await client.GetFromJsonAsync<IEnumerable<Product>>($"/api/products/search?filter={content}");
         }
 
         public Task<IEnumerable<Product>> GetAllAsync()
@@ -50,6 +50,16 @@ namespace Vavatech.Shopper.ClientApp.Services
         public Task RecalcuateAllProductPriceAsync(decimal ratio)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<VirtualizeResponse<Product>> Get(PagingParameters parameters)
+        {
+            string request = $"/api/products?StartIndex={parameters.StartIndex}&PageSize={parameters.PageSize}";
+
+            var response = await client.GetFromJsonAsync<VirtualizeResponse<Product>>(request);
+
+            return response;
+
         }
     }
 }

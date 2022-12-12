@@ -16,6 +16,15 @@
         <label for="description">Description</label>
         <InputTextArea id="description" @bind-Value="product.Description" class="form-control" />
 
+
+        <label for="color">Color</label>
+        <InputSelect id="color" @bind-Value="product.Color" class="form-select">
+            @foreach(var color in colors)
+            {
+                <option value="@color">@color</option>
+            }
+        </InputSelect>
+
         <label for="price">Price</label>
         <InputNumber id="price" @bind-Value="product.Price" class="form-control" />
 
@@ -31,6 +40,13 @@
     public int Id { get; set; }
 
     private Product product;
+
+    private IEnumerable<string> colors;
+
+    protected override void OnInitialized()
+    {
+        colors = new string[] { "Red", "Blue", "Green" };
+    }
 
     protected override async Task OnParametersSetAsync()
     {

@@ -8,13 +8,26 @@
     </thead>
 
     <tbody>
-        @foreach (var item in Items)
+        <Virtualize Items="Items.ToList()" Context="item">
+            <ItemContent>            
+                <tr>
+                    @RowTemplate(item)
+                </tr>
+            </ItemContent>
+            <Placeholder>
+                <p>Loading...</p>
+            </Placeholder>
+
+           
+
+        </Virtualize>
+@*        @foreach (var item in Items)
         {
             <tr>
                 @RowTemplate(item)
             </tr>
         }
-    </tbody>
+*@    </tbody>
 </table>
 
 @code {

@@ -22,6 +22,10 @@ public class ProductFaker : Faker<Product>
         RuleFor(p => p.Description, f => f.Commerce.ProductDescription());
 		RuleFor(p => p.Color, f => f.Commerce.Color());
 		RuleFor(p => p.Price, f => decimal.Parse(f.Commerce.Price()));
+
+        RuleFor(p => p.HasDiscount, f => f.Random.Bool());
+        RuleFor(p => p.Discount, (f, product) => product.HasDiscount ?  Math.Round(product.Price * f.Random.Decimal(0.1m, 0.5m), 2) : 0);
+
         RuleFor(p => p.Tags, f => f.PickRandom(tags.Values, f.Random.Int(1,tags.Count)));
 
         RuleFor(p => p.Size, f => f.PickRandom<Size>().OrNull(f, 0.5f));

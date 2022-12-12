@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="10.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Vavatech.Shopper.Domain\Vavatech.Shopper.Domain.csproj" />
     <ProjectReference Include="..\Vavatech.Shopper.Infrastructure\Vavatech.Shopper.Infrastructure.csproj" />
   </ItemGroup>

@@ -1,7 +1,9 @@
 using Bogus;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using Vavatech.Shopper.Domain;
+using Vavatech.Shopper.Domain.Validators;
 using Vavatech.Shopper.Infrastructure;
 using Vavatech.Shopper.Infrastructure.Fakers;
 
@@ -10,6 +12,8 @@ using Vavatech.Shopper.Infrastructure.Fakers;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<IProductRepository, InMemoryProductRepository>();
 builder.Services.AddSingleton<Faker<Product>, ProductFaker>();
+
+builder.Services.AddSingleton<IValidator<Product>, ProductValidator>();
 
 builder.Services.AddSingleton<IDictionary<int, Product>>((sp) =>
 {
@@ -78,17 +82,25 @@ app.MapGet("/api/products", async (
 app.MapPut("api/products/{id}", async (
     [FromRoute] int id, 
     [FromBody] Product product, 
-    [FromServices] IProductRepository repository) =>
+    [FromServices] IProductRepository repository,
+    IValidator<Product> validator 
+    ) =>
 {
     if (id != product.Id)
         return Results.BadRequest();
+
+    var result = await validator.ValidateAsync(product);
+
+    if (!result.IsValid)
+    {
+        return Results.ValidationProblem(result.ToDictionary());
+    }
 
     await repository.Update(product);
 
     return Results.NoContent();
 
 });
-
 
 //app.MapGet("api/users", (HttpRequestMessage req, HttpResponseMessage res) 
 //        => "Hello Users");

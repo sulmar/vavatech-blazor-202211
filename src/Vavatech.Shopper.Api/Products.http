@@ -10,7 +10,7 @@ Content-Type: application/json
 
 {
 	"Id": 1,
-	"Name":"My product",
+	"Name":"My",
 	"Description": "Lorem ipsum",
-	"Price": 100.99
+	"Price": 0
 }

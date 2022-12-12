@@ -9,13 +9,17 @@
 {
     <EditForm Model="product" OnValidSubmit="HandleValidSubmit">
 
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
         <label for="name">Name</label>
         <InputText id="name" @bind-Value="product.Name" class="form-control" />
+        <ValidationMessage For="@(()=>product.Name)" />
 
 
         <label for="description">Description</label>
         <InputTextArea id="description" @bind-Value="product.Description" class="form-control" />
-
+        <ValidationMessage For="@(()=>product.Description)" />
 
         <label for="color">Color</label>
         <InputSelect id="color" @bind-Value="product.Color" class="form-select">
@@ -38,6 +42,7 @@
 
         <label for="price">Price</label>
         <InputNumber id="price" @bind-Value="product.Price" class="form-control" />
+        <ValidationMessage For="@(()=>product.Price)" />
 
         <div class="form-check">        
             <label for="hasDiscount" class="form-check-label">Has discount</label>

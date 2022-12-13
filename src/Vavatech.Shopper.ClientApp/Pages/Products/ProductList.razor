@@ -1,5 +1,10 @@
 ﻿@page "/products"
+@using Microsoft.AspNetCore.SignalR.Client
 @inject ProductService Api
+@inject HubConnection connection
+@implements IAsyncDisposable
+
+@*@attribute [Authorize]*@
 
 
 <h3>ProductList</h3>
@@ -32,6 +37,7 @@ else
             <td>
                 <button @onclick=@(() => NavigateToProduct(context.Id))><span class="oi oi-eye" /></button>
                 <button @onclick=@(()=> Edit(context.Id)) ><span class="oi oi-pencil" /></button>
+                <button @onclick=@(()=> New())><span class="oi oi-credit-card" /></button>
             </td>
 
         </RowTemplate>
@@ -39,7 +45,7 @@ else
 }
 
 @code {
-    private IEnumerable<Product> products;   
+    private ICollection<Product> products;   
 
     public int TotalSize { get; set; }
 
@@ -55,12 +61,33 @@ else
         var response = await Api.Get(new PagingParameters { PageSize = 20, StartIndex = 0 });
 
         products = response.Items;
+
+        connection.On<Product>("AddedProduct", product => {
+            products.Add(product);
+
+            Console.WriteLine(product.Name);
+
+            StateHasChanged();
+        });
+
+        await connection.StartAsync();
+
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await connection.StopAsync();
     }
 
     private void Edit(int id)
     {
         NavigationManager.NavigateTo($"/products/Edit/{id}");
 
+    }
+
+    private void New()
+    {
+        
     }
 
     private async Task NavigateToProduct(int id)
@@ -79,7 +106,8 @@ else
     {
         await Task.Delay(TimeSpan.FromSeconds(2));
 
-        products = await Api.GetByContent(content);
+        var items = await Api.GetByContent(content);
+        products = items.ToList();
     }
 
     private async Task GetProducts(PagingParameters pagingParameters)
@@ -89,4 +117,6 @@ else
         products = result.Items;
         TotalSize = result.TotalSize;
     }
+
+
 }

@@ -18,7 +18,10 @@ public class JwtTokenService : ITokenService
         var claims = new Claim[]
         {
             new Claim(JwtRegisteredClaimNames.Email, user.Email),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim(ClaimTypes.Role, "developer"),
+            new Claim(ClaimTypes.Role, "manager"),
+            new Claim(ClaimTypes.DateOfBirth, DateTime.Parse("2010-12-31").ToShortDateString())
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));

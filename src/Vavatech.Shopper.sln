@@ -5,8 +5,6 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vavatech.Shopper.ClientApp", "Vavatech.Shopper.ClientApp\Vavatech.Shopper.ClientApp.csproj", "{75649E92-113F-4295-8DC9-70FEB0B09828}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vavatech.Shopper.ServerApp", "Vavatech.Shopper.ServerApp\Vavatech.Shopper.ServerApp.csproj", "{07F0F73A-EB4D-49D4-99A1-DA898913916C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vavatech.Shopper.Domain", "Vavatech.Shopper.Domain\Vavatech.Shopper.Domain.csproj", "{50D815C7-C48D-4C96-AF1F-7DA9365D364B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vavatech.Shopper.Infrastructure", "Vavatech.Shopper.Infrastructure\Vavatech.Shopper.Infrastructure.csproj", "{A123CFFF-3168-48DE-B0FD-BD9E2903287C}"
@@ -25,10 +23,6 @@ Global
 		{75649E92-113F-4295-8DC9-70FEB0B09828}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75649E92-113F-4295-8DC9-70FEB0B09828}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75649E92-113F-4295-8DC9-70FEB0B09828}.Release|Any CPU.Build.0 = Release|Any CPU
-		{07F0F73A-EB4D-49D4-99A1-DA898913916C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{07F0F73A-EB4D-49D4-99A1-DA898913916C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{07F0F73A-EB4D-49D4-99A1-DA898913916C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{07F0F73A-EB4D-49D4-99A1-DA898913916C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{50D815C7-C48D-4C96-AF1F-7DA9365D364B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{50D815C7-C48D-4C96-AF1F-7DA9365D364B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50D815C7-C48D-4C96-AF1F-7DA9365D364B}.Release|Any CPU.ActiveCfg = Release|Any CPU

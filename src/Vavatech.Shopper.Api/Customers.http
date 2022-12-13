@@ -1,0 +1,6 @@
+﻿@host = https://localhost:7219
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hcmNpbi5zdWxlY2tpQHN1bG1hci5wbCIsImp0aSI6Ijc2YjQxZDkxLTY4MDUtNDhiMC1iNTczLWRmMzE1YjU2ODVkOSIsImV4cCI6MTY3MDkzMDQzNiwiaXNzIjoic2hvcHBlci52YXZhdGVjaC5wbCIsImF1ZCI6ImRvbWFpbi5jb20ifQ.mxmx3OlPxXQigfcO3DaRHM0mrrGNMB3s3Fvmqk0RBaY
+
+
+GET {{host}}/api/customers
+Authorization: Bearer {{token}}

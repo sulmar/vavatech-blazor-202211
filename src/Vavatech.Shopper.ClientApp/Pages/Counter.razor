@@ -17,6 +17,16 @@
     <button @onclick="ResetCount">Reset</button>
 </div>
 
+<AuthorizeView>
+    <Authorized>
+        The user is authorized
+    </Authorized>
+    <NotAuthorized>
+        The user is not authorized
+    </NotAuthorized>
+</AuthorizeView>
+
+
 @code {
     // back field
     private int currentCount;

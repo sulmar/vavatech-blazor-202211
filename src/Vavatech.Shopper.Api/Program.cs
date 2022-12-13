@@ -1,11 +1,17 @@
 using Bogus;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.IdentityModel.Tokens;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Mime;
 using System.Text;
+using Vavatech.Shopper.Api.Authorization;
+using Vavatech.Shopper.Api.AuthorizationHandler;
+using Vavatech.Shopper.Api.Hubs;
 using Vavatech.Shopper.Domain;
 using Vavatech.Shopper.Domain.Validators;
 using Vavatech.Shopper.Infrastructure;
@@ -35,14 +41,22 @@ builder.Services.AddCors(options =>
         //  policy.AllowAnyOrigin();
         //        policy.AllowAnyMethod();
         policy.WithOrigins("https://localhost:7031");
-        policy.WithMethods(new string[] { "GET", "PUT" });
+        policy.WithMethods(new string[] { "GET", "PUT", "POST" });
         policy.AllowAnyHeader();
     });
 });
 
 builder.Services.AddControllers();
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Adult", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireRole("developer");
+        policy.Requirements.Add(new MinimumAgeRequirment(18));
+    });
+});
 
 // dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 6.0.11
 builder.Services.AddAuthentication(options =>
@@ -65,8 +79,21 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
     };
 
+    options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            context.Token = context.Request.Cookies["X-Access-Token"];
+
+            return Task.CompletedTask;
+        }
+    };
+
 });
 
+
+builder.Services.AddSingleton<IAuthorizationHandler, MinimumAgeAuthorizationHandler>();
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -110,6 +137,11 @@ app.MapGet("/api/products", async (
 
     return Results.Ok(products);
 
+});
+
+app.MapPost("api/products", async (Product product, IHubContext<ProductsHub> hubContext) =>
+{
+    await hubContext.Clients.All.SendAsync("AddedProduct", product);
 });
 
 app.MapPut("api/products/{id}", async (
@@ -164,6 +196,8 @@ app.MapGet("api/reports/{id}", (int id) =>
 });
 
 app.MapControllers();
+
+app.MapHub<ProductsHub>("ws/products");
 
 app.UseAuthentication();
 app.UseAuthorization();

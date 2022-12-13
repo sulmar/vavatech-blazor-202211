@@ -16,7 +16,7 @@
         <ValidationSummary />
 
         <label for="name">Name</label>
-        <InputText id="name" @bind-Value="product.Name" class="form-control" />
+        <InputText id="name" @bind-Value="product.Name" class="form-control" @ref=nameInputElementRef />
         <ValidationMessage For="@(()=>product.Name)" />
 
 
@@ -69,6 +69,7 @@
 
 
 @code {
+    private InputText nameInputElementRef;
 
     [Parameter]
     public int Id { get; set; }
@@ -95,6 +96,13 @@
 
         NavigationManager.NavigateTo("/products");
 
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {     
+        if (nameInputElementRef!=null && nameInputElementRef.Element != null)
+            await nameInputElementRef.Element.Value.FocusAsync();
+     
     }
 
 }

@@ -2,7 +2,7 @@
     <form>
         <div>
             <label for="filter">Search: </label>
-            <input type="text" id="filter" @bind-value="filter" />
+            <input type="text" id="filter" @bind-value="filter" @ref="filterInputElementRef" />
         </div>
 
         <button type="button" @onclick="Search">Search</button>
@@ -12,12 +12,22 @@
 @code {
     private string filter;
 
+    private ElementReference filterInputElementRef;
+
     [Parameter]
     public EventCallback<string> OnSearch { get; set; }
 
     private void Search()
     {
         OnSearch.InvokeAsync(filter);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await filterInputElementRef.FocusAsync();
+        }
     }
 
 }

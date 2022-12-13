@@ -2,6 +2,7 @@ using Bogus;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using System.Net.Mime;
 using Vavatech.Shopper.Domain;
 using Vavatech.Shopper.Domain.Validators;
 using Vavatech.Shopper.Infrastructure;
@@ -64,7 +65,8 @@ app.MapGet("api/products/search", async ([FromQuery(Name ="filter")] string? fil
 app.MapGet("/api/products", async (
     [FromQuery] int startIndex, 
     [FromQuery] int? pageSize,
-    IProductRepository repository
+    IProductRepository repository,
+    HttpContext httpContext
     ) =>
 {
     var productParameters = new PagingParameters
@@ -115,5 +117,20 @@ app.MapMethods("api/products/{barcode}", new string[] { "HEAD" }, async (string 
         return Results.NotFound();
 
 });
+
+app.MapGet("api/reports/{id}", (int id) =>
+{
+    string path = Path.Combine(app.Environment.ContentRootPath, "Assets", "lorem-ipsum.pdf");
+
+    if (!File.Exists(path)) 
+        return Results.NotFound();
+
+    Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+
+    return Results.File(stream, MediaTypeNames.Application.Pdf);
+    
+    // return Results.File(path, MediaTypeNames.Application.Pdf); 
+});
+
 
 app.Run();

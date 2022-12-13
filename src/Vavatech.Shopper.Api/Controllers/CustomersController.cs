@@ -8,15 +8,14 @@ namespace Vavatech.Shopper.Api.Controllers
     {
         [Authorize]
         [HttpGet]
-        public string Get()
+        public ActionResult<string> Get()
         {
-            if (this.User.Identity.IsAuthenticated)
+            if (!this.User.Identity.IsAuthenticated)
             {
-
+                return Unauthorized();
             }
                 
-
-            return "Hello Customers";
+            return Ok("Hello Customers");
         }
     }
 }

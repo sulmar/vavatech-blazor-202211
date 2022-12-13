@@ -1,8 +1,11 @@
 using Bogus;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Mime;
+using System.Text;
 using Vavatech.Shopper.Domain;
 using Vavatech.Shopper.Domain.Validators;
 using Vavatech.Shopper.Infrastructure;
@@ -36,6 +39,34 @@ builder.Services.AddCors(options =>
         policy.AllowAnyHeader();
     });
 });
+
+builder.Services.AddControllers();
+
+builder.Services.AddAuthorization();
+
+// dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 6.0.11
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    string secretKey = builder.Configuration["Secret-Key"];
+    string issuer = "shopper.vavatech.pl";
+    string audience = "domain.com";
+
+    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+        ValidateAudience = true,
+        ValidAudience = audience,
+        ValidateIssuer = true,
+        ValidIssuer = issuer,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+    };
+
+});
+
 
 var app = builder.Build();
 
@@ -132,5 +163,9 @@ app.MapGet("api/reports/{id}", (int id) =>
     // return Results.File(path, MediaTypeNames.Application.Pdf); 
 });
 
+app.MapControllers();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.Run();

@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vavatech.Shopper.Infrastruc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vavatech.Shopper.Api", "Vavatech.Shopper.Api\Vavatech.Shopper.Api.csproj", "{99E38B94-9FA1-4F34-A629-800D873ECCB4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vavatech.AuthApi", "Vavatech.AuthApi\Vavatech.AuthApi.csproj", "{950D4F46-F35D-497E-BEA4-855554B43118}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{99E38B94-9FA1-4F34-A629-800D873ECCB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99E38B94-9FA1-4F34-A629-800D873ECCB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99E38B94-9FA1-4F34-A629-800D873ECCB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{950D4F46-F35D-497E-BEA4-855554B43118}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{950D4F46-F35D-497E-BEA4-855554B43118}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{950D4F46-F35D-497E-BEA4-855554B43118}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{950D4F46-F35D-497E-BEA4-855554B43118}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

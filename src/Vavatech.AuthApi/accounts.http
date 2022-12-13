@@ -1,0 +1,9 @@
+﻿@host = https://localhost:7049
+
+POST {{host}}/api/token
+Content-Type: application/json
+
+{
+	"login":"marcin",
+	"password": "123"
+}

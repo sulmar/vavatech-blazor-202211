@@ -18,6 +18,7 @@ Przykłady ze szkolenia Blazor 6
 - ``` dotnet restore ``` - pobranie pakietów nuget powiązanych z projektem
 - ``` dotnet build ``` - kompilacja projektu
 - ``` dotnet run ``` - uruchomienie projektu
+- ``` dotnet run --launch-profile {profile} ``` - uruchomienie projektu w wybranym profilu
 - ``` dotnet watch run ``` - uruchomienie projektu w trybie śledzenia zmian
 - ``` dotnet add {project.csproj} reference {library.csproj} ``` - dodanie odwołania do biblioteki
 - ``` dotnet remove {project.csproj} reference {library.csproj} ``` - usunięcie odwołania do biblioteki
